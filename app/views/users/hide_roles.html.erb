@@ -1,0 +1,18 @@
+<% @roles.each do |r| %>
+  <input type="checkbox" name="role" value="<%= r.role %>" class="role" <%= r.is_hide ? 'checked=true' : ''  %>> <%= r.role %>
+<% end %>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('.role').click(function(){
+			data = {checkbox_status: $(this).is(":checked"),checkbox_val:$(this).val()}
+			$.ajax({
+				url:location.origin+"/role_create",
+				method:"POST",
+				data:data,
+				success:function(){
+					console.log("role status changed")
+				}
+			})
+		})
+	})
+</script>

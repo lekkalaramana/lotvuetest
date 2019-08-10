@@ -1,0 +1,24 @@
+<select class="roleName">
+<%= options_for_select(@roles)%>
+</select>
+<div id="showTable">
+	
+	<% if @user_data.present? %>
+	<%= render partial: "list_of_users" %>
+	<% end %>
+</div>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('.roleName').change(function(){
+			$.ajax({
+				url:location.origin+"/show_users_based_on_role",
+				method: 'get',
+				data:{role: $(this).val()},
+				success:function(res){
+					$("#showTable").html(res)
+				}
+			})
+		})
+	})
+</script>

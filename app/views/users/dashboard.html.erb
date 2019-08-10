@@ -1,0 +1,47 @@
+
+
+
+<div class="container">
+	<h2>User dashboard</h2>
+	<div class="user-form">
+		<%= form_for @user, url: {action: "create",method:'post'} do |f| %>
+		<div class="form-group">
+			<%= f.label :first_name %>
+			<%= f.text_field :first_name %>
+		</div>
+		<div class="form-group">
+			<%= f.label :last_name %>
+			<%= f.text_field :last_name %>
+		</div>
+		<div class="form-group">
+			<%= f.label :email %>
+			<%= f.text_field :email %>
+		</div>
+		<div class="form-group">
+			<%= f.label :role %>
+			<%= f.select :role, options_for_select(@roles), :class => 'genForm_dropBox' %>
+		</div>
+		<div class="form-group">
+			<%= f.label :image %><br>
+			<%= f.file_field :image, :multiple => true, name:"image" %>
+		</div>
+		<div id="skillSet" style="display:none">
+			<%= label_tag 'user_key' %>
+			<%= text_field_tag 'user_key[]' %>
+			<%= label_tag 'user_value' %>
+			<%= text_field_tag 'user_value[]' %>
+		</div>
+		<div class="dynamic-meta"></div>
+		<button type="button" class="btn btn-info" id="addNewTag">Add mata</button>
+		<%= f.submit "create user" ,class:'btn btn-success'%>
+		<% end %>
+
+	</div>
+</div>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$("#addNewTag").click(function(){
+			$(".dynamic-meta").append($("#skillSet").html());
+		});
+	});
+</script>
